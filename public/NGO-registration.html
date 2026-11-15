@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NGO Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f5f7fb;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .main-box {
+            max-width: 850px;
+            margin: 15px auto;
+            border: 2px solid #2563eb;
+            background: white;
+        }
+
+        .heading {
+            background-color: #2563eb;
+            padding: 12px;
+            text-align: center;
+            color: white;
+        }
+
+        .heading h3 {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .form-area {
+            padding: 24px;
+        }
+
+        .form-label {
+            color: #2563eb;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #777;
+            border-radius: 3px;
+            min-height: 38px;
+            font-size: 14px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #2563eb;
+            box-shadow: none;
+        }
+
+        .btn-custom {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            padding: 9px 12px;
+        }
+
+        .btn-custom:hover {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        /* Center both picture fields and their previews */
+        .picture-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: center;
+        }
+
+        .picture-field {
+            width: 100%;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        .preview-box {
+            width: 100%;
+            height: 160px;
+            border: 1px solid #777;
+            margin: 10px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            background: #fafafa;
+            overflow: hidden;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .small-note {
+            font-size: 12px;
+            color: #666;
+        }
+
+        #message {
+            font-size: 14px;
+        }
+
+        @media (max-width: 576px) {
+            .form-area {
+                padding: 16px;
+            }
+
+            .main-box {
+                margin: 5px auto;
+            }
+
+            .picture-field {
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="main-box">
+
+            <div class="heading">
+                <h3 class="mb-0">NGO Registration</h3>
+            </div>
+
+            <div class="form-area">
+
+                <form id="ngoForm" enctype="multipart/form-data" method="POST">
+
+                    <input type="hidden" name="hdn" id="hdn">
+                    <input type="hidden" name="hdnAadhar" id="hdnAadhar">
+
+                    <!-- Email and Fetch -->
+                    <div class="row align-items-end g-3 mb-3">
+                        <div class="col-md-7">
+                            <label class="form-label" for="txtemailid">Email ID</label>
+                            <input type="email" class="form-control"
+                                id="txtemailid" name="txtemailid"
+                                placeholder="Enter email address" required>
+                        </div>
+
+                        <div class="col-md-5">
+                            <button type="button" id="fetchBtn" class="btn btn-custom w-100">
+                                FETCH
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- NGO Name, Registration Number and Type -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label" for="txtngoname">NGO Name</label>
+                            <input type="text" class="form-control" id="txtngoname" name="txtngoname" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label" for="txtRegno">
+                                Registration Number
+                            </label>
+                            <input type="text" class="form-control" id="txtRegno" name="txtRegno" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label" for="comboType">NGO Type</label>
+                            <select class="form-select" id="comboType"
+                                name="comboType" required>
+                                <option value="">Select</option>
+                                <option value="Education">Education</option>
+                                <option value="Environment">Environment</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Animal Welfare">Animal Welfare</option>
+                                <option value="Women Empowerment">Women Empowerment</option>
+                                <option value="Child Welfare">Child Welfare</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Address and City -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-8">
+                            <label class="form-label" for="txtAddress">Address</label>
+                            <input type="text" class="form-control"
+                                id="txtAddress" name="txtAddress" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label" for="txtCity">City</label>
+                            <input type="text" class="form-control"
+                                id="txtCity" name="txtCity" required>
+                        </div>
+                    </div>
+
+                    <!-- President and Contact -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="txtPresident">
+                                President
+                            </label>
+                            <input type="text" class="form-control"
+                                id="txtPresident" name="txtPresident" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="txtContact">
+                                Contact Number
+                            </label>
+                            <input type="tel" class="form-control"
+                                id="txtContact" name="txtContact"
+                                pattern="[0-9+\-\s]{10,15}"
+                                placeholder="Enter contact number" required>
+                        </div>
+                    </div>
+
+                    <!-- CENTERED PICTURES -->
+                    <div class="row g-4 mt-3 mb-3 picture-section">
+
+                        <!-- Registration Proof Picture -->
+                        <div class="col-md-5">
+                            <div class="picture-field">
+                                <label class="form-label" for="proofPic">
+                                    Registration Proof Pic
+                                </label>
+
+                                <input type="file" class="form-control"
+                                    id="proofPic" name="proofPic"
+                                    accept="image/png,image/jpeg,image/webp">
+
+                                <div class="preview-box">
+                                    <img id="picPreview"
+                                        alt="Registration proof preview"
+                                        class="d-none">
+
+                                    <span id="placeholder">
+                                        Proof Preview
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- President Aadhaar Picture -->
+                        <div class="col-md-5">
+                            <div class="picture-field">
+                                <label class="form-label" for="presidentAadharPic">
+                                    President Aadhaar Pic
+                                </label>
+
+                                <input type="file" class="form-control"
+                                    id="presidentAadharPic"
+                                    name="presidentAadharPic"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    required>
+
+                                <div class="preview-box">
+                                    <img id="aadharPreview"
+                                        alt="President Aadhaar preview"
+                                        class="d-none">
+
+                                    <span id="aadharPlaceholder">
+                                        Aadhaar Preview
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Website -->
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6 mx-auto">
+                            <label class="form-label" for="txtWebsite">
+                                Website
+                            </label>
+
+                            <input type="url" class="form-control"
+                                id="txtWebsite" name="txtWebsite"
+                                placeholder="https://example.org">
+                        </div>
+                    </div>
+
+                    <!-- Save and Update Buttons -->
+                    <div class="row mt-4 g-3">
+                        <div class="col-md-5 offset-md-1">
+                            <button type="submit"
+                                class="btn btn-custom w-100"
+                                formaction="/saveNgoRecord">
+                                Save
+                            </button>
+                        </div>
+
+                        <div class="col-md-5">
+                            <button type="submit" id="updateBtn"
+                                class="btn btn-custom w-100"
+                                formaction="/updateNgoRecord">
+                                Update Record
+                            </button>
+                        </div>
+                    </div>
+
+                    <p id="message" class="mt-3 mb-0" role="status"></p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#txtemailid").val(localStorage.getItem("activeuser")).prop("readonly",true);
+        $("#proofPic").change(function () {
+            let file = this.files[0];
+            if (file) {
+                $("#picPreview").attr("src", URL.createObjectURL(file));
+                $("#picPreview").removeClass("d-none");
+                $("#placeholder").addClass("d-none");
+            }
+        });
+
+        $("#presidentAadharPic").change(function () {
+            let file = this.files[0];
+
+            if (file) {
+                $("#aadharPreview").attr("src", URL.createObjectURL(file));
+                $("#aadharPreview").removeClass("d-none");
+                $("#aadharPlaceholder").addClass("d-none");
+            }
+        });
+
+        //==================================
+        // FETCH NGO RECORD
+        //==================================
+        $("#fetchBtn").click(function () {
+
+            let obj = {
+                method: "post",
+                url: "/fetchNgoRecord",
+                data: {
+                    emailidAjax: $("#txtemailid").val()
+                }
+            };
+
+            $.ajax(obj).then(function (responseJson) {
+
+                if (responseJson == "Invalid Id") {
+                    alert("Invalid Email ID");
+                    return;
+                }
+
+                // Fill text fields
+                $("#txtemailid").val(responseJson.emailid);
+                $("#txtngoname").val(responseJson.ngoname);
+                $("#txtRegno").val(responseJson.regno);
+                $("#comboType").val(responseJson.type);
+                $("#txtAddress").val(responseJson.address);
+                $("#txtCity").val(responseJson.city);
+                $("#txtPresident").val(responseJson.president);
+                $("#txtContact").val(responseJson.contact);
+                $("#txtWebsite").val(responseJson.website);
+
+                // Save existing image URLs in hidden fields
+                $("#hdn").val(responseJson.picurl || "nopic.jpg");
+
+                $("#hdnAadhar").val(
+                    responseJson.presidentAadharPic || "nopic.jpg"
+                );
+
+                // Show registration proof picture
+                if (responseJson.picurl &&
+                    responseJson.picurl != "nopic.jpg") {
+
+                    $("#picPreview").attr("src", responseJson.picurl).removeClass("d-none");
+                    $("#placeholder").addClass("d-none");
+
+                } else {
+                    $("#picPreview").addClass("d-none");
+                    $("#placeholder").removeClass("d-none");
+                }
+
+                // Show President Aadhaar picture
+                if (responseJson.presidentAadharPic &&
+                    responseJson.presidentAadharPic != "nopic.jpg") {
+                    $("#aadharPreview").attr("src", responseJson.presidentAadharPic).removeClass("d-none");
+                    $("#aadharPlaceholder").addClass("d-none");
+
+                } else {
+                    $("#aadharPreview").addClass("d-none");
+                    $("#aadharPlaceholder").removeClass("d-none");
+                }
+                // Existing Aadhaar picture need not be uploaded again
+                $("#presidentAadharPic").prop("required", false);
+                $("#message").text("NGO Record Fetched Successfully").css("color", "green");
+            }).fail(function (err) {
+                alert(err.responseText || "Unable to fetch NGO record");
+            });
+        });
+    });
+</script>
+</body>
+</html>

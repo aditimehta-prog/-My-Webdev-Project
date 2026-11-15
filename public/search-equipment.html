@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VITARRA | Equipment Finder</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let myModule = angular.module("mouduleKuch", []);
+        let myController = myModule.controller("controllerKuch", function ($scope, $http) {
+
+            $scope.citiesJSON = [];
+            $scope.categoriesJSON = [];
+            $scope.equipmentList = [];
+            $scope.city = "";
+            $scope.category = "";
+
+            $scope.loadDistCities = function () {
+                let url = "/loadDistCities";
+                $http.get(url).then(function (resp) {
+                    // alert(JSON.stringify(resp.data))
+                    $scope.citiesJSON = resp.data;//json array received in .data
+
+                }, function (err) {
+                    alert(JSON.stringify(err))
+                })
+            };
+
+            $scope.fillCategories = function () {
+                let url = "/fillCategories";
+                $http.get(url).then(function (resp) {
+                    // alert(JSON.stringify(resp.data))
+                    $scope.categoriesJSON = resp.data;//json array received in .data
+
+                }, function (err) {
+                    alert(JSON.stringify(err))
+                })
+            };
+            $scope.findEquipments = function () {
+                let url = "/findEquipments?city=" + $scope.city + "&category=" + $scope.category;
+                $http.get(url).then(function (resp) {
+                    // alert(JSON.stringify(resp.data))
+                    $scope.equipmentList = resp.data;//json array received in .data
+
+                }, function (err) {
+                    alert(JSON.stringify(err))
+                })
+            };
+            $scope.doshowDonor = function (emailid) {
+                let url = "/doshowDonor?emailid=" + emailid;
+                $http.get(url).then(function (resp) {
+                    //  alert(JSON.stringify(resp.data))
+                    $scope.donor = resp.data[0];//json array received in .data
+
+                }, function (err) {
+                    alert(JSON.stringify(err))
+                })
+            };
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2563eb;
+            padding: 12px 30px;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: white;
+        }
+
+        /* Main Container */
+        .finder-container {
+            max-width: 1150px;
+            min-height: 580px;
+            margin: 40px auto;
+            padding: 35px;
+            background: white;
+            border: 2px solid #2563eb;
+            border-radius: 6px;
+        }
+
+        /* Heading */
+        .finder-heading {
+            text-align: center;
+            color: #2563eb;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        /* Search Section */
+        .form-label {
+            font-size: 21px;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .form-select {
+            height: 50px;
+            border: 2px solid #2563eb;
+            border-radius: 5px;
+            font-size: 17px;
+        }
+
+        .form-select:focus {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 5px #93c5fd;
+        }
+
+        /* Search Button */
+        .search-btn {
+            width: 100%;
+            height: 50px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+            margin-top: 35px;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #1e40af;
+        }
+
+        /* Results Section */
+        .results-container {
+            margin-top: 45px;
+            border: 2px solid #2563eb;
+            min-height: 300px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .results-header {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .result-row {
+            padding: 15px 20px;
+            border-bottom: 1px solid #bfdbfe;
+            display: flex;
+            align-items: center;
+        }
+
+        .equipment-image {
+            width: 100px;
+            height: 90px;
+            equipmentect-fit: cover;
+            border: 2px solid #2563eb;
+            border-radius: 5px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px 10px;
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .finder-container {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            .finder-heading {
+                font-size: 25px;
+            }
+
+            .search-btn {
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch" ng-init="loadDistCities();fillCategories();">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                VITARRA
+            </a>
+        </div>
+    </nav>
+
+    <!-- Equipment Finder -->
+    <div class="finder-container">
+
+        <h2 class="finder-heading">
+            Equipment Finder
+        </h2>
+
+        <!-- Search Form -->
+        <div class="row g-3 align-items-end">
+
+            <!-- City -->
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label">City</label>
+
+                <select class="form-select" id="city" name="city" ng-model="city">
+                    <option value="" selected>Select</option>
+                    <option ng-repeat="equipment in citiesJSON" value="{{equipment.district}}">{{equipment.district}}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Category -->
+            <div class="col-lg-4 col-md-6">
+                <label class="form-label">Category</label>
+
+                <select class="form-select" id="category" name="category" ng-model="category">
+                    <option value="" selected>Select</option>
+                    <option ng-repeat="equipment in categoriesJSON" value="{{equipment.category}}">
+                        {{equipment.category}}</option>
+                </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-lg-4 col-md-12">
+                <button class="search-btn" ng-click="findEquipments()">
+                    Find Equipments
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- Equipment Results Section -->
+
+        <div class="results-container mt-5">
+
+            <div class="results-header">
+                <center>
+                    Available Equipments
+                </center>
+            </div>
+            <div class="container-fluid py-4">
+                <div class="row g-4">
+                    <!-- Equipment Cards -->
+                    <div class="col-lg-4 col-md-6" ng-repeat="equipment in equipmentList">
+                        <div class="card h-100 shadow-sm">
+                            <!-- Equipment Image -->
+                            <img ng-src="{{equipment.picUrl}}" class="card-img-top"
+                                style="height:220px; equipmentect-fit:cover;" alt="Equipment Image">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title text-primary">
+                                    {{equipment.category}}
+                                </h5>
+
+                                <p class="card-text">
+                                    <b>Donor Email:</b>
+                                    {{equipment.emailid}}
+                                </p>
+
+                                <p class="card-text">
+                                    <b>Category:</b>
+                                    {{equipment.category}}
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer bg-white">
+
+                                <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                                    data-bs-target="#detailsModal" ng-click="doshowDonor(equipment.emailid);">
+                                    Contact Donor
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center fw-bold" style="color: #2563eb;" id="exampleModalLabel">
+                            Donor Details
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <b>Email ID:</b>
+                            {{donor.emailid}}
+                        </p>
+                        <p>
+                            <b>Name:</b>
+                            {{donor.name}}
+                        </p>
+                        <p>
+                            <b>Address:</b>
+                            {{donor.address}}
+                        </p>
+                        <p>
+                            <b>PIN Code:</b>
+                            {{donor.pin}}
+                        </p>
+                        <p>
+                            <b>Contact Number:</b>
+                            {{donor.contact}}
+                        </p>
+                        <p>
+                            <b>Contact Hours:</b>
+                            {{donor.hfrom}} to {{donor.hto}}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary w-100"  data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>

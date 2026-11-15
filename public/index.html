@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VITARRA | Together We Care</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #142b50;
+            --light: #eff6ff;
+            --accent: #38bdf8;
+            --text: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f8ff;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 15px 5%;
+            box-shadow: 0 3px 18px rgba(0, 0, 0, 0.07);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .brand-icon {
+            margin-right: 8px;
+        }
+
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 600;
+            margin: 0 8px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-buttons .btn {
+            margin-left: 8px;
+            border-radius: 25px;
+            padding: 9px 22px;
+            font-weight: 600;
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: white;
+            border: none;
+            transition: .3s;
+        }
+
+        .btn-main:hover {
+            background: #1749bb;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, .25);
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+        }
+
+        .hero .carousel-item {
+            height: 530px;
+            background: #142b50;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 530px;
+            object-fit: cover;
+            opacity: .55;
+        }
+
+        .hero .carousel-caption {
+            bottom: 115px;
+            left: 10%;
+            right: 10%;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 58px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-bottom: 28px;
+        }
+
+        .hero .btn {
+            padding: 13px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        /* GENERAL SECTIONS */
+
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .section-heading h2 span {
+            color: var(--primary);
+        }
+
+        .section-heading p {
+            color: #718096;
+            margin-top: 10px;
+        }
+
+        .heading-line {
+            width: 65px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin: 15px auto;
+        }
+
+        /* INTRO */
+
+        .intro {
+            background: white;
+            text-align: center;
+            padding: 55px 15%;
+        }
+
+        .intro h2 {
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* SERVICES */
+
+        .services-section {
+            background: #f0f6ff;
+        }
+
+        .service-card {
+            background: white;
+            padding: 32px 22px;
+            text-align: center;
+            height: 100%;
+            border-radius: 18px;
+            border: 1px solid #e1eafa;
+            box-shadow: 0 5px 22px rgba(20, 43, 80, .05);
+            transition: .35s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, .15);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            width: 85px;
+            height: 85px;
+            border-radius: 22px;
+            background: #eaf2ff;
+            color: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 22px;
+            font-size: 35px;
+            transition: .3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(-8deg);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 750;
+            color: var(--dark);
+            margin-bottom: 13px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #64748b;
+            min-height: 95px;
+        }
+
+        .service-card .btn {
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 20px;
+        }
+
+        /* STATISTICS */
+
+        .stats-section {
+            background: linear-gradient(120deg, #1d4ed8, #0f2f65);
+            color: white;
+            padding: 55px 7%;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .stat-box i {
+            font-size: 35px;
+            margin-bottom: 12px;
+            color: #93c5fd;
+        }
+
+        .stat-box h2 {
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .stat-box p {
+            margin: 0;
+            opacity: .85;
+        }
+
+        /* REACH US */
+
+        .reach-section {
+            background: white;
+        }
+
+        .map-frame {
+            height: 350px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid #d9e6fb;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .07);
+        }
+
+        .map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* MEET US */
+
+        .meet-section {
+            background: #f0f6ff;
+        }
+
+        .person-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, .06);
+            transition: .35s;
+            height: 100%;
+        }
+
+        .person-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, .13);
+        }
+
+        .person-top {
+            height: 100px;
+            background: linear-gradient(120deg, #2563eb, #60a5fa);
+        }
+
+        .person-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-top: -60px;
+            background: #eaf2ff;
+        }
+
+        .person-info {
+            padding: 0 20px 25px;
+        }
+
+        .person-info h3 {
+            font-size: 20px;
+            font-weight: 750;
+            color: var(--dark);
+            margin-top: 15px;
+        }
+
+        .person-info h6 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .person-info p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* CALL TO ACTION */
+
+        .cta {
+            background: linear-gradient(120deg, #2563eb, #142b50);
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .cta h2 {
+            font-weight: 800;
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 25px;
+        }
+
+        .cta .btn {
+            border-radius: 30px;
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #102344;
+            color: white;
+            padding: 35px 7% 18px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer h3 {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #60a5fa;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            margin: 10px 0;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #1e3a63;
+            color: white;
+            border-radius: 50%;
+            margin: 12px 5px;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer hr {
+            border-color: #64748b;
+        }
+
+        .footer small {
+            color: #94a3b8;
+        }
+
+        /* MODALS */
+
+        .modal-header {
+            background: linear-gradient(120deg, #2563eb, #142b50);
+            color: white;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px;
+            border-radius: 9px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .12);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .toggle-password {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: .8s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 768px) {
+
+            .hero .carousel-item,
+            .hero img {
+                height: 390px;
+            }
+
+            .hero .carousel-caption {
+                bottom: 65px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 55px 5%;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .intro {
+                padding: 45px 8%;
+            }
+
+            .cta h2 {
+                font-size: 27px;
+            }
+
+        }
+
+        @media(max-width: 576px) {
+
+            .navbar {
+                padding: 12px 4%;
+            }
+
+            .navbar-brand {
+                font-size: 23px;
+            }
+
+            .nav-buttons {
+                display: flex;
+                gap: 6px;
+            }
+
+            .nav-buttons .btn {
+                margin: 0;
+                padding: 7px 12px;
+                font-size: 13px;
+            }
+
+            .hero .carousel-item,
+            .hero img {
+                height: 340px;
+            }
+
+            .hero .carousel-caption {
+                bottom: 45px;
+            }
+
+            .hero .carousel-caption h1 {
+                font-size: 30px;
+            }
+
+            .map-frame {
+                height: 260px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#home">
+                <i class="fa-solid fa-hand-holding-heart brand-icon"></i>
+                VITARRA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reachus">Reach Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#meetus">Meet Us</a>
+                    </li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
+                    <button class="btn btn-main" data-bs-toggle="modal" data-bs-target="#signupModal">
+                        Sign Up
+                    </button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#adminModal"> <i
+                            class="fa-solid fa-user-shield"></i> Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- HERO CAROUSEL -->
+    <section id="home" class="hero">
+        <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
+            <div class="carousel-indicators">
+                <button data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+                <button data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+                <button data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1400"
+                        alt="Community volunteers">
+                    <div class="carousel-caption">
+                        <h1>Welcome to VITARRA</h1>
+                        <p>Connecting people who want to help with people who need help.</p>
+                        <a href="#services" class="btn btn-main">
+                            Explore Services <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1400"
+                        alt="Charity donation">
+                    <div class="carousel-caption">
+                        <h1>Every Donation Matters</h1>
+                        <p>Your small contribution can create a big difference.</p>
+                        <a href="#services" class="btn btn-main">
+                            Start Helping
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1400"
+                        alt="Volunteers helping community">
+                    <div class="carousel-caption">
+                        <h1>Together We Can Help</h1>
+                        <p>Building a caring, supportive and stronger community.</p>
+                        <a href="#meetus" class="btn btn-main">
+                            Meet Our Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" data-bs-target="#homeCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" data-bs-target="#homeCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+    <!-- INTRODUCTION -->
+    <section class="intro reveal">
+        <h2>Making the World a Better Place</h2>
+        <p>
+            VITARRA is a platform designed to connect NGOs, donors and people
+            in need. Our mission is to make helping others easier by creating
+            a community where resources, opportunities and kindness come together.
+        </p>
+    </section>
+    <!-- SERVICES -->
+    <section id="services" class="section services-section">
+        <div class="section-heading reveal">
+            <h2>Our <span>Services</span></h2>
+            <div class="heading-line"></div>
+            <p>Discover how VITARRA connects people and creates opportunities.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-building-ngo"></i>
+                    </div>
+                    <h3>NGO</h3>
+                    <p>
+                        Connect with NGOs working for social welfare.
+                        Discover initiatives and support community development.
+                    </p>
+                    <button class="btn btn-outline-primary" onclick="showService('NGO')">
+                        Explore More
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3>Needy</h3>
+                    <p>
+                        People who need assistance can share their requirements
+                        and find support from donors and volunteers.
+                    </p>
+                    <button class="btn btn-outline-primary" onclick="showService('Needy')">
+                        Get Support
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3>Donor</h3>
+                    <p>
+                        Make meaningful contributions by helping individuals
+                        and organisations with useful donations.
+                    </p>
+                    <button class="btn btn-outline-primary" onclick="showService('Donor')">
+                        Donate Now
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <h3>Equipment</h3>
+                    <p>
+                        Donate or request essential equipment and useful
+                        items to help people in need.
+                    </p>
+                    <button class="btn btn-outline-primary" onclick="showService('Equipment')">
+                        View Equipment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <section class="stats-section">
+        <div class="row">
+            <div class="col-md-4 stat-box reveal">
+                <i class="fa-solid fa-building"></i>
+                <h2>NGOs</h2>
+                <p>Supporting Organisations</p>
+
+            </div>
+            <div class="col-md-4 stat-box reveal">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <h2>Donors</h2>
+                <p>Generous Contributors</p>
+            </div>
+            <div class="col-md-4 stat-box reveal">
+                <i class="fa-solid fa-people-group"></i>
+                <h2>Community</h2>
+                <p>People Helping People</p>
+            </div>
+        </div>
+        </secion>
+        <!-- REACH US -->
+        <section id="reachus" class="section reach-section">
+            <div class="section-heading reveal">
+                <h2>Reach <span>Us</span></h2>
+                <div class="heading-line"></div>
+                <p>Visit our location and connect with us.</p>
+            </div>
+            <div class="map-frame reveal">
+                <iframe title="VITARRA location"
+                    src="https://maps.google.com/maps?q=College%20of%20Engineering%20and%20Management%2C%20Rampura%20Phul%2C%20Punjab&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    loading="lazy" allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+        <!-- MEET US -->
+        <section id="meetus" class="section meet-section">
+            <div class="section-heading reveal">
+                <h2>Meet <span>Our Team</span></h2>
+                <div class="heading-line"></div>
+                <p>The people behind the VITARRA initiative.</p>
+            </div>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-5 reveal">
+                    <div class="person-card">
+                        <div class="person-top"></div>
+                        <img class="person-photo"
+                            src="https://banglorecomputereducation.com/wp-content/uploads/2026/03/Gemini_Generated_Image_r9dixr9dixr9dixr-828x1024.png"
+                            alt="Guide profile">
+                        <div class="person-info">
+                            <h3>Rajesh K. Bansal</h3>
+                            <h6>Under The Guidance Of</h6>
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                bcebti@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 reveal">
+                    <div class="person-card">
+                        <div class="person-top"></div>
+                        <img class="person-photo" src="https://placehold.co/150x150/eaf2ff/2563eb?text=Developer"
+                            alt="Developer profile">
+                        <div class="person-info">
+                            <h3>Aditi Mehta</h3>
+                            <h6>Developed By</h6>
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                aditi@gmail.com
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                College of Engineering and Management, Punjabi University Neighbourhood Campus, Rampura
+                                Phul
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CALL TO ACTION -->
+        <section class="cta">
+            <h2>Be a Reason for Someone's Smile!</h2>
+            <p>Join VITARRA and become part of a community that cares.</p>
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#signupModal">
+                Join VITARRA <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </section>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <h3><i class="fa-solid fa-hand-holding-heart"></i> VITARRA</h3>
+            <p>Connecting People, Creating Opportunities.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="#" aria-label="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+            <hr>
+            <small>© 2026 VITARRA. All Rights Reserved.</small>
+        </footer>
+        <!-- SIGNUP MODAL -->
+        <div class="modal fade" id="signupModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Create Your Account
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="signupForm" action="do-signup" method="post">
+                            <div class="text-center mb-4">
+                                <i class="fa-solid fa-circle-user" style="font-size:75px;color:#2563eb"></i>
+                                <p class="mt-2 text-muted">Join the VITARRA community</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email ID</label>
+                                <input class="form-control" type="email" id="txtEmail" name="txtEmail"
+                                    placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input class="form-control" type="password" id="txtPwd" name="txtPwd"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">User Type</label>
+                                <select class="form-select" name="comboUser" id="comboUser" required>
+                                    <option value="">Select User Type</option>
+                                    <option value="DONOR">DONOR</option>
+                                    <option value="NGO">NGO</option>
+                                    <option value="NEEDY">NEEDY</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-main w-100 py-3" type="submit">
+                                Create Account
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIN MODAL -->
+        <div class="modal fade" id="loginModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login to VITARRA
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm">
+                            <div class="text-center mb-4">
+                                <i class="fa-solid fa-user-circle" style="font-size:75px;color:#2563eb"></i>
+                                <p class="mt-2 text-muted">Welcome back!</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email ID</label>
+                                <input class="form-control" type="email" name="loginEmail" id="loginEmail"
+                                    placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Password</label>
+                                <input class="form-control" type="password" name="loginPwd" id="loginPwd"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <p id="msg" class="text-danger"></p>
+                            <button class="btn btn-main w-100 py-3" type="submit" id="btnLogin">
+                                Login Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADMIN LOGIN MODAL -->
+        <div class="modal fade" id="adminModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa-solid fa-user-shield"></i>
+                            Admin Authentication
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="adminForm">
+                            <div class="text-center mb-4">
+                                <i class="fa-solid fa-shield-halved" style="font-size:75px;color:#2563eb">
+                                </i>
+                                <p class="mt-2 text-muted">
+                                    Enter your Admin Passcode
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Admin Passcode
+                                </label>
+                                <input type="password" class="form-control" id="adminPasscode" name="adminPasscode"
+                                    placeholder="Enter Admin Passcode" required>
+                            </div>
+                            <p id="adminMsg" class="text-danger"></p>
+                            <button type="submit" class="btn btn-main w-100 py-3" id="btnAdmin">
+                                <i class="fa-solid fa-lock"></i>
+                                Verify & Continue
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SERVICE INFORMATION MODAL -->
+        <div class="modal fade" id="serviceModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="serviceTitle">Service</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="serviceDescription"></p>
+                        <button class="btn btn-main w-100" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#signupModal">
+                            Join VITARRA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#adminForm").submit(function (event) {
+                event.preventDefault();
+                let passcode = $("#adminPasscode").val();
+                console.log("Frontend Passcode:", passcode);
+                $.ajax({
+                    url: "/admin-login",
+                    type: "POST",
+                    data: {
+                        passcode: passcode
+                    },
+                    success: function (res) {
+                        if (res.trim() == "success") {
+                            window.location.href = "/admindashboard";
+                        }
+                        else {
+                            $("#adminMsg").text("Wrong Passcode!");
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        $("#adminMsg").text("Server Error!");
+                    }
+                });
+            });
+            $(document).ready(function () {
+                $("#loginForm").submit(function (event) {
+                    event.preventDefault();
+                    let obj = {
+                        method: "POST",
+                        url: "/do-login",
+                        data: {
+                            email: $("#loginEmail").val(),
+                            pwd: $("#loginPwd").val()
+                        }
+                    }
+                    $.ajax(obj).then(function (response) {
+                        localStorage.setItem("activeuser", $("#loginEmail").val());
+                        alert(response)
+                        if (response == "DONOR") {
+                            location.href = "/donordashboard";
+                        }
+                        else if (response == "NEEDY") {
+                            location.href = "/needydashboard";
+                        }
+                        else if (response == "NGO") {
+                            location.href = "/ngodashboard";
+                        }
+                        else {
+                            $("#msg").text(response);
+                        }
+                    }).fail(function (err) {
+                        $("#msg").text(err.responseText);
+                    });
+                });
+
+
+                let serviceDetails = {
+                    NGO: "Connect with social welfare organisations, discover their initiatives and collaborate to support community development.",
+                    Needy: "People who require help can connect with donors and volunteers to find assistance and essential resources.",
+                    Donor: "Become a donor and help individuals and organisations by contributing useful resources and donations.",
+                    Equipment: "Donate or request essential medical equipment and other useful items to support people in need."
+                };
+                // SHOW SERVICE MODAL
+                window.showService = function (service) {
+                    $("#serviceTitle").text(service + " Services");
+                    $("#serviceDescription").text(serviceDetails[service]);
+                    let modal = bootstrap.Modal.getOrCreateInstance(
+                        document.getElementById("serviceModal")
+                    );
+                    modal.show();
+                };
+                // ================= SCROLL REVEAL ANIMATION =================
+                function revealElements() {
+                    $(".reveal").each(function () {
+                        let elementTop = $(this).offset().top;
+                        let windowBottom = $(window).scrollTop() + $(window).height();
+                        if (windowBottom > elementTop + 50) {
+                            $(this).addClass("show");
+                        }
+                    });
+                }
+                $(window).on("scroll", function () {
+                    revealElements();
+                });
+                revealElements();
+                // ================= MOBILE NAVBAR =================
+                $(".navbar-nav .nav-link").click(function () {
+                    let menu = $("#navbarMenu");
+                    if (menu.hasClass("show")) {
+                        let collapse = bootstrap.Collapse.getOrCreateInstance(
+                            document.getElementById("navbarMenu")
+                        );
+                        collapse.hide();
+                    }
+                });
+            });
+
+        </script>
+</body>
+
+</html>

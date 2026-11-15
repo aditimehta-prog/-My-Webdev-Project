@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Needy Details</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            padding: 20px;
+        }
+
+        .main-box {
+            max-width: 1100px;
+            margin: 15px auto;
+            border: 2px solid #1d4ed8;
+            background-color: white;
+        }
+
+        .heading {
+            background-color: #2563eb;
+            border-bottom: 2px solid #1d4ed8;
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .heading h3 {
+            margin: 0;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-title {
+            text-align: center;
+            color: #1d4ed8;
+            font-size: 23px;
+            margin-bottom: 35px;
+        }
+
+        .image-section {
+            padding: 10px;
+        }
+
+        .image-group {
+            margin-bottom: 20px;
+        }
+
+        .image-group label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #1d4ed8;
+        }
+
+        .image-group img {
+            width: 200px;
+            height: 185px;
+            object-fit: contain;
+            border: 2px solid #1d4ed8;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .image-group input {
+            max-width: 280px;
+            font-size: 13px;
+        }
+
+        .details-section {
+            padding: 10px 25px;
+        }
+
+        .details-section label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1d4ed8;
+        }
+
+        .details-section input {
+            width: 100%;
+            min-height: 48px;
+            border: 2px solid #1d4ed8;
+            border-radius: 0;
+            margin-bottom: 24px;
+        }
+
+        .upload-btn {
+            display: block;
+            width: 80%;
+            max-width: 400px;
+            margin: 30px auto 0;
+            background-color:#1d4ed8;
+            color: white;
+            border: none;
+            border-radius: 0;
+            padding: 12px;
+            font-size: 18px;
+        }
+
+        .upload-btn:hover {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            .details-section {
+                padding: 10px;
+            }
+
+            .image-group img {
+                width: 180px;
+                height: 160px;
+            }
+
+            .upload-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="main-box">
+
+            <div class="heading">
+                <h3>Needy Registration</h3>
+            </div>
+
+            <div class="form-container">
+
+                <form action="/aiready-pic"
+                    method="post"
+                    enctype="multipart/form-data">
+
+                    <div class="row g-4">
+
+                        <!-- Left Side: Aadhaar Pictures -->
+                        <div class="col-md-5 image-section">
+
+                            <div class="image-group">
+                                <label for="frontPic">
+                                    Front Aadhaar Card Pic
+                                </label>
+
+                                <img id="frontPreview"
+                                    src="https://placehold.co/200x185/ffffff/777777?text=Front+Image"
+                                    alt="Front Aadhaar preview">
+
+                                <input type="file"
+                                    id="frontPic"
+                                    name="frontPic"
+                                    accept="image/*"
+                                    class="form-control"
+                                    required
+                                    onchange="previewImage(event, 'frontPreview')">
+                            </div>
+
+                            <div class="image-group">
+                                <label for="rearPic">
+                                    Rear Aadhaar Card Pic
+                                </label>
+
+                                <img id="rearPreview"
+                                    src="https://placehold.co/200x185/ffffff/777777?text=Rear+Image"
+                                    alt="Rear Aadhaar preview">
+
+                                <input type="file"
+                                    id="rearPic"
+                                    name="rearPic"
+                                    accept="image/*"
+                                    class="form-control"
+                                    required
+                                    onchange="previewImage(event, 'rearPreview')">
+                            </div>
+
+                        </div>
+
+                        <!-- Right Side: Needy Details -->
+                        <div class="col-md-7 details-section">
+
+                            <h4 class="form-title">Needy Details</h4>
+
+                            <label for="emailid">Email ID</label>
+
+                            <input type="email"
+                                id="emailid"
+                                name="emailid"
+                                class="form-control"
+                                required>
+
+                            <label for="contact">Contact Number</label>
+
+                            <input type="tel" id="contact" name="contact"
+                                class="form-control" placeholder="Enter your mobile number"
+                                required>
+
+                            <button type="submit" class="btn upload-btn">
+                                Upload Data to Server
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+         $(document).ready(function () {
+        $("#emailid").val(localStorage.getItem("activeuser")).prop("readonly",true);
+         });
+        function previewImage(event, previewId) {
+            const file = event.target.files[0];
+
+            if (file) {
+                document.getElementById(previewId).src =
+                    URL.createObjectURL(file);
+            }
+        }
+        
+    </script>
+
+</body>
+</html>

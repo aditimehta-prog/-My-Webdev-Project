@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Master | VITARRA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2563eb;
+            padding: 15px 30px;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-size: 23px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Page Heading */
+        .page-heading {
+            text-align: center;
+            margin: 35px 0 25px;
+        }
+
+        .page-heading h2 {
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* Main Container */
+        .main-container {
+            background: white;
+            max-width: 1250px;
+            margin: 0 auto 40px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Fetch Button */
+        .fetch-btn {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .fetch-btn:hover {
+            background-color: #1d4ed8;
+            color: white;
+        }
+
+        /* Table */
+        .table {
+            margin-top: 20px;
+            vertical-align: middle;
+            min-width: 1100px;
+        }
+
+        .table thead th {
+            background-color: #2563eb;
+            color: white;
+            padding: 14px;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .table tbody td {
+            padding: 13px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .table tbody tr:hover {
+            background-color: #eff6ff;
+        }
+
+        .table-responsive {
+            border-radius: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #b8c9ee;
+            border-radius: 10px;
+        }
+
+        /* Empty Message */
+        .empty-message {
+            text-align: center;
+            color: #888;
+            padding: 25px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #888;
+            padding: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 18px;
+            }
+
+            .main-container {
+                margin: 15px;
+                padding: 15px;
+            }
+
+            .page-heading h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+
+    <script>
+        let myModule = angular.module("mouduleKuch", []);
+        let myController = myModule.controller("controllerKuch", function ($scope, $http) {
+            $scope.jsonAry = [];
+            $scope.fetchallNGOs = function () {
+                let url = "/fetchallNGOs";
+                $http.post(url).then(function (resp) {
+                    $scope.jsonAry = resp.data;
+                }, function (err) {
+                    alert(JSON.stringify(err));
+                });
+            };
+
+        });
+    </script>
+</head>
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch"  ng-init="fetchallNGOs();">
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                VITARRA
+            </a>
+        </div>
+    </nav>
+    <div class="page-heading">
+        <h2>NGO Master</h2>
+        <p>Manage and view all registered NGOs</p>
+    </div>
+    <div class="main-container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+            <h5 class="fw-bold mb-0">
+                <i class="fa-solid fa-building text-primary"></i>
+                All NGO Records
+            </h5>
+            <button type="button" class="btn fetch-btn"
+                    ng-click="fetchallNGOs();">
+                <i class="fa-solid fa-rotate"></i>
+                Fetch All NGOs
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Email-Id</th>
+                        <th>NGO Name</th>
+                        <th>Registration No.</th>
+                        <th>NGO Type</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>President</th>
+                        <th>Contact No.</th>
+                        <th>President Aadhaar Pic</th>
+                        <th>Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="obj in jsonAry">
+                        <td>{{$index + 1}}</td>
+                        <td>{{obj.emailid}}</td>
+                        <td>{{obj.ngoname}}</td>
+                        <td>{{obj.regno}}</td>
+                        <td>{{obj.type}}</td>
+                        <td>{{obj.address}}</td>
+                        <td>{{obj.city}}</td>
+                        <td>{{obj.president}}</td>
+                        <td>{{obj.contact}}</td>
+                        <td>{{obj.picurl}}</td>
+                        <td>{{obj.website}}</td>
+                    </tr>
+                    <tr ng-if="jsonAry.length == 0">
+                        <td colspan="11" class="empty-message">
+                            <i class="fa-solid fa-folder-open"></i>
+                            No NGO Records Found
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 VITARRA | NGO Management System
+    </div>
+</body>
+</html>
