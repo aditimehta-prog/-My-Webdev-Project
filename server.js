@@ -317,7 +317,7 @@ app.post("/UpdateDonarRecord", async function (req, resp) {
     let contact = req.body.contact;
     let hfrom = req.body.hfrom;
     let hto = req.body.hto;
-    mysqlCon.query("UPDATE ngos SET name = ?, address = ?, adhaar = ?, pin = ?,region = ?, district = ?, contact = ?, hfrom= ?, hto = ? WHERE emailid = ?",
+    mysqlCon.query("UPDATE donors SET name = ?, address = ?, adhaar = ?, pin = ?,region = ?, district = ?, contact = ?, hfrom= ?, hto = ? WHERE emailid = ?",
         [name, address, adhaar, pin, region, district, contact, hfrom, hto, emailid], function (err, result) {
             if (err) {
                 return resp.send(err.message);
@@ -335,7 +335,7 @@ app.post("/FetchDonarRecord", (req, resp) => {
     let emailid = req.body.emailidAjax;
     console.log("Email received:", emailid);
 
-    mysqlCon.query("SELECT * FROM ngos WHERE emailid = ?", [emailid], function (err, table) {
+    mysqlCon.query("SELECT * FROM donors WHERE emailid = ?", [emailid], function (err, table) {
         if (err == null) {
             console.log(table)
             if (table.length == 1)
